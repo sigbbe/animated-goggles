@@ -1,0 +1,37 @@
+{
+	"forms": {
+		"1": [
+			{
+				"id": "A",
+				"question": "What is the popularity of the song 'I'm Yours' by Jason Mraz?",
+				"schema": {
+					"type": "number",
+					"min": 0,
+					"max": 100
+				}
+			},
+			{
+				"id": "B",
+				"question": "How clear/meaningful do you think this explanation is?",
+				"schema": {
+					"type": "string",
+					"min": 0,
+					"max": 100
+				}
+			},
+			{
+				"id": "C",
+				"question": "Which of the following features do you think contributed the most to the AI's prediction?",
+				"schema": {
+					"type": "multiple-choice",
+					"options": [
+						"A",
+						"B",
+						"C",
+						"D"
+					]
+				}
+			}
+		]
+	}
+}

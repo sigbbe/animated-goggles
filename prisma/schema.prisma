@@ -1,0 +1,57 @@
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id      String   @id @default(cuid())
+    email   String   @unique
+    answers Answer[]
+}
+
+model Question {
+    id      String          @id @default(cuid())
+    title   String?
+    body    String
+    formId  String
+    answers Answer[]
+    forms   Form            @relation(fields: [formId], references: [id])
+    choices MultipleChoice?
+}
+
+model MultipleChoice {
+    id         String   @id @default(cuid())
+    questionId String   @unique
+    question   Question @relation(fields: [questionId], references: [id])
+    choice1    String   @unique
+    choice2    String   @unique
+    choice3    String?  @unique
+    choice4    String?  @unique
+    choice5    String?  @unique
+    choice6    String?  @unique
+    choice7    String?  @unique
+    choice8    String?  @unique
+    choice9    String?  @unique
+    choice10   String?  @unique
+}
+
+model Form {
+    id          String     @id @default(cuid())
+    title       String
+    description String
+    questions   Question[]
+    userId      String?
+}
+
+model Answer {
+    id         String   @id @default(cuid())
+    body       String
+    user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    userId     String
+    question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    questionId String
+}
