@@ -1,0 +1,135 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id             String           @id @default(cuid())
+    email          String           @unique
+    age            Int
+    ai_knowledge   String
+    ai_experience  Int
+    education      String
+    answers        Answer[]
+    FormSubmission FormSubmission[]
+}
+
+model Question {
+    id      String       @id @default(cuid())
+    title   String?
+    body    Json
+    formId  String
+    answers Answer[]
+    forms   Form         @relation(fields: [formId], references: [id])
+    type    QuestionType
+}
+
+enum QuestionType {
+    SHORT_TEXT
+    LONG_TEXT
+    NUMBER_RANGE
+    EXPLENATION
+    SONG
+    MULTIPLE_CHOICE
+    ORDERING
+}
+
+model Form {
+    id             String           @id @default(cuid())
+    title          String
+    description    String
+    questions      Question[]
+    FormSubmission FormSubmission[]
+}
+
+model FormSubmission {
+    id        String   @id @default(cuid())
+    user      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    userId    String
+    form      Form     @relation(fields: [formId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    formId    String
+    answers   Answer[]
+    completed Boolean  @default(false)
+}
+
+model Answer {
+    id               String          @id @default(cuid())
+    body             String
+    user             User            @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    userId           String
+    question         Question        @relation(fields: [questionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    questionId       String
+    formSubmission   FormSubmission? @relation(fields: [formSubmissionId], references: [id])
+    formSubmissionId String?
+
+    track   Track?  @relation(fields: [trackId], references: [id])
+    trackId String?
+}
+
+model Track {
+    id                  String   @id @default(cuid())
+    name                String
+    popularity          Int
+    popularityPredicted Int?
+    Answer              Answer[]
+}
+
+// model Artist {
+//     id         String          @id @default(cuid())
+//     followers  Int
+//     genres     ArtistInGenre[]
+//     name       String
+//     popularity Int
+
+//     tracks TrackByArtist[]
+// }
+
+// model Track {
+//     id                  String   @id @default(cuid())
+//     name                String
+//     popularity          Int
+//     duration_ms      Int
+//     explicit         Boolean
+//     artists          TrackByArtist[]
+//     realease_date    DateTime
+//     danceability     Float
+//     energy           Float
+//     key              Int
+//     loudness         Float
+//     mode             Int
+//     speechiness      Float
+//     acousticness     Float
+//     instrumentalness Float
+//     liveness         Float
+//     valence          Float
+//     tempo            Float
+//     timeSignature    Int
+// }
+
+// model TrackByArtist {
+//     artistId String
+//     trackId  String
+//     artist   Artist @relation(fields: [artistId], references: [id])
+//     track    Track  @relation(fields: [trackId], references: [id])
+
+//     @@id([artistId, trackId])
+// }
+
+// model ArtistInGenre {
+//     artistId String
+//     genreId  String
+//     artist   Artist @relation(fields: [artistId], references: [id])
+//     genre    Genre  @relation(fields: [genreId], references: [id])
+
+//     @@id([artistId, genreId])
+// }
+
+// model Genre {
+//     id            String          @id @default(cuid())
+//     genre         String
+//     artistInGenre ArtistInGenre[]
+// }

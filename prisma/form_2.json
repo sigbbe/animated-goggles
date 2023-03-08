@@ -1,0 +1,45 @@
+{
+	"title": "Spotify XAI test form",
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Ut leo felis, elementum in enim sed, malesuada dignissim magna.Etiam congue eros sit amet felis convallis, nec pellentesque massa vehicula.Phasellus tempor vestibulum tortor ut scelerisque.Nulla id faucibus nibh.Quisque ut ultricies ipsum.Phasellus pellentesque luctus efficitur.",
+	"questions": [
+		{
+			"title": "string",
+			"type": "SHORT_TEXT",
+			"body": {
+				"question": "string"
+			}
+		},
+		{
+			"title": "XAI Explenation",
+			"type": "LONG_TEXT",
+			"body": {
+				"question": "How clear/meaningful do you think this explanation is?"
+			}
+		},
+		{
+			"title": "Song popularity",
+			"type": "NUMBER_RANGE",
+			"body": {
+				"question": "What is the popularity of the song 'I'm Yours' by Jason Mraz?",
+				"min": 0,
+				"max": 100
+			}
+		},
+		{
+			"title": "Multiple choice",
+			"type": "MULTIPLE_CHOICE",
+			"body": {
+				"ordered": true,
+				"single": true,
+				"question": "Which of the following features do you think contributed the most to the AI's prediction?",
+				"choices": [
+					"Artist",
+					"Year",
+					"Genre",
+					"Explicit",
+					"Duration"
+				]
+			}
+		}
+	]
+}

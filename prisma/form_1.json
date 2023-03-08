@@ -1,0 +1,47 @@
+{
+	"title": "Spotify XAI form 2",
+	"description": "Lorem LIGMA BALLS dolor sit amet, consectetur adipiscing elit.Ut leo felis, elementum in enim sed, malesuada dignissim magna.Etiam congue eros sit amet felis convallis, nec pellentesque massa vehicula.Phasellus tempor vestibulum tortor ut scelerisque.Nulla id faucibus nibh.Quisque ut ultricies ipsum.Phasellus pellentesque luctus efficitur.",
+	"questions": [
+		{
+			"title": "I smell profit",
+			"body": {
+				"question": "Someone once told me (probably some comedian) that rapid changes in hair color was “the white woman’s call for help,” that’s stuck with me for a while now, especially after dating someone who fit that to a T. Think it’s probably somewhat applicable to all genders/races though lol, but mainly just somewhat hilarious as a joke.",
+				"img": "https://i.imgur.com/1ZQ3Z0M.png"
+			},
+			"type": "EXPLENATION"
+		},
+		{
+			"title": "True story",
+			"type": "EXPLENATION",
+			"body": {
+				"question": "How clear/meaningful do you think this explanation is?",
+				"img": "/img/ronny.jpg"
+			}
+		},
+		{
+			"title": "Song popularity",
+			"type": "NUMBER_RANGE",
+			"body": {
+				"question": "What is the popularity of the song 'I'm Yours' by Jason Mraz?",
+				"min": 0,
+				"max": 100
+			}
+		},
+		{
+			"title": "Multiple choice",
+			"type": "MULTIPLE_CHOICE",
+			"body": {
+				"ordered": true,
+				"single": true,
+				"question": "Which of the following features do you think contributed the most to the AI's prediction?",
+				"choices": [
+					"Artist",
+					"Year",
+					"Genre",
+					"Explicit",
+					"Duration"
+				]
+			}
+		}
+	]
+}

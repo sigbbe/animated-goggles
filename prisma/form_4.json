@@ -1,0 +1,36 @@
+{
+	"title": "5 random songs",
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Ut leo felis, elementum in enim sed, malesuada dignissim magna.Etiam congue eros sit amet felis convallis, nec pellentesque massa vehicula.Phasellus tempor vestibulum tortor ut scelerisque.Nulla id faucibus nibh.Quisque ut ultricies ipsum.Phasellus pellentesque luctus efficitur.",
+	"questions": [
+		{
+			"type": "SONG",
+			"body": {
+				"track_id": "5yY9lUy8nbvjM1Uyo1Uqoc"
+			}
+		},
+		{
+			"type": "SONG",
+			"body": {
+				"track_id": "3zQGmJ4k3JeqwAjfrEcwHp"
+			}
+		},
+		{
+			"type": "SONG",
+			"body": {
+				"track_id": "1I8DHdu9jHhEbk8NvGrQb6"
+			}
+		},
+		{
+			"type": "SONG",
+			"body": {
+				"track_id": "7EgG37pjxw0Y4GHwjK3CBS"
+			}
+		},
+		{
+			"type": "SONG",
+			"body": {
+				"track_id": "3mTpegrOwRn0oJjv4TSbEE"
+			}
+		}
+	]
+}

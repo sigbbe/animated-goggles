@@ -1,0 +1,61 @@
+{
+	"title": "XAI for låter sin popularitet - Gruppe J",
+	"description": "Teamet ønsker å praktisk anvende ulike XAI metodikker og vurdere deres evne til å forklare prediksjoner for låter sin “Popularity”. Gjennom dette prosjektet kan vi forhåpentligvis oppdage potensielle mangler med forklaringsmodellene og gi inspirasjon til hvordan de kan forbedres.",
+	"questions": [
+		{
+			"title": "Ditt forhold til musikk",
+			"type": "MULTIPLE_CHOICE",
+			"body": {
+				"ordered": false,
+				"single": true,
+				"question": "Hvor ofte bruker du Spotify?",
+				"choices": [
+					"Daglig",
+					"Ukentlig",
+					"Månedlig",
+					"Aldri"
+				]
+			}
+		},
+		{
+			"title": "Ditt forhold til musikk",
+			"type": "MULTIPLE_CHOICE",
+			"body": {
+				"ordered": "boolean",
+				"single": "boolean",
+				"question": "Hvor godt kjenner du til låter som er populære på Spotify?",
+				"choices": [
+					"Svært dårlig",
+					"Dårlig",
+					"Nøytral",
+					"Godt",
+					"Svært god"
+				]
+			}
+		},
+		{
+			"title": "Info",
+			"type": "EXPLENATION",
+			"body": {
+				"question": "Lytt til lydklippet på neste side. Du vil bli presentert med en tilfeldig låt fra Spotify nedenfor, hvor du skal gi din prediksjon av låtens popularitet på en skala fra 0 til 100.",
+				"img": "https://i.imgur.com/3ZQ3Z0M.png"
+			}
+		},
+		{
+			"title": "En tilfeldig låt",
+			"type": "SONG",
+			"body": {
+				"track_id": "5yY9lUy8nbvjM1Uyo1Uqoc"
+			}
+		},
+		{
+			"title": "Prediker popularitet",
+			"type": "NUMBER_RANGE",
+			"body": {
+				"question": "Hvor populær tror du låten er?",
+				"min": 0,
+				"max": 100
+			}
+		}
+	]
+}

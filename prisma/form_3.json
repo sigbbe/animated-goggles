@@ -1,0 +1,39 @@
+{
+	"title": "3 Drake Songs",
+	"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Ut leo felis, elementum in enim sed, malesuada dignissim magna.Etiam congue eros sit amet felis convallis, nec pellentesque massa vehicula.Phasellus tempor vestibulum tortor ut scelerisque.Nulla id faucibus nibh.Quisque ut ultricies ipsum.Phasellus pellentesque luctus efficitur.",
+	"questions": [
+		{
+			"type": "SONG",
+			"body": {
+				"artists": [
+					"Drake"
+				],
+				"name": "ONE DANCE",
+				"img_src": "https://i.scdn.co/image/ab67616d0000b2739416ed64daf84936d89e671c",
+				"src": "/audio/sample-3s.mp3"
+			}
+		},
+		{
+			"type": "SONG",
+			"body": {
+				"artists": [
+					"Drake"
+				],
+				"name": "GOD'S PLAN",
+				"img_src": "https://i.pinimg.com/originals/98/1b/96/981b966611274100a05b8936f615e761.jpg",
+				"src": "/audio/sample-3s.mp3"
+			}
+		},
+		{
+			"type": "SONG",
+			"body": {
+				"artists": [
+					"Drake"
+				],
+				"name": "IN MY FEELINGS",
+				"img_src": "https://cdns-images.dzcdn.net/images/cover/b69d3bcbd130ad4cc9259de543889e30/500x500.jpg",
+				"src": "/audio/sample-3s.mp3"
+			}
+		}
+	]
+}
