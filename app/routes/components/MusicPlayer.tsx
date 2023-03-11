@@ -13,45 +13,65 @@ const startTime = {
 };
 
 function MusicPlayer({ question, body, next }: FormCompoenentProps<Song>) {
-	const { src } = body;
 	const audioElement = useRef<HTMLAudioElement>(null);
-	const [isPlaying, setIsPlaying] = useState(false);
+	const intervals = new Set<NodeJS.Timer>();
+	const [isPlaying, _setIsPlaying] = useState(false);
 	const [time, setTime] = useState(startTime);
-	let t = useRef<NodeJS.Timeout>();
+	const [song, _setSong] = useState(body);
+	const setSong = (song: Song) => {
+		clearAllIntervals();
+		_setSong(song);
+	};
+	const setIsPlaying = (isPlaying: boolean) => {
+		clearAllIntervals();
+		if (isPlaying) {
+			audioElement.current?.play();
+		} else {
+			audioElement.current?.pause();
+		}
+		_setIsPlaying(isPlaying);
+	};
+	const clearAllIntervals = () => {
+		intervals.forEach(clearInterval);
+	};
+	if (song.id !== body.id) {
+		setSong(body);
+		setIsPlaying(false);
+		setTime(startTime);
+	}
 	const cleanUpIfEnded = () => {
 		const { current } = audioElement;
 		if (current?.ended) {
 			setTime(startTime);
 			setIsPlaying(false);
-			clearInterval(t.current);
+			intervals.forEach(clearInterval);
 		}
 	};
-
+	const getTime = (audio: HTMLAudioElement) => {
+		return {
+			played: audio.currentTime,
+			duration: audio.duration
+		};
+	};
 	const togglePlay = () => {
 		const { current } = audioElement;
 		if (!current) return;
 		if (isPlaying) {
 			setIsPlaying(false);
-			current.pause();
-			clearInterval(t.current);
 		} else {
 			setIsPlaying(true);
-			current.play();
-			t.current = setInterval(() => {
-				const time = {
-					played: current.currentTime,
-					duration: current.duration
-				};
+			const interval = setInterval(() => {
+				const time = getTime(current);
 				setTime(time);
 				cleanUpIfEnded();
-			}, 100);
+			}, 1000);
+			intervals.add(interval);
 		}
 	};
-
 	return (
 		<QuestionForm question={ question } next={ next }>
 			<div className="w-3/4 m-auto rounded shadow-2xl">
-				<audio src={ src } ref={ audioElement } />
+				<audio src={ body.src } ref={ audioElement } />
 				<PlayerDetails song={ body } />
 				<PlayerControls
 					song={ body }
@@ -66,13 +86,17 @@ function MusicPlayer({ question, body, next }: FormCompoenentProps<Song>) {
 }
 
 function PlayerDetails({ song }: { song: Song; }) {
+	const didNotLoad = song.src === null || song.src === undefined;
 	return (
 		<>
-			<img
-				className="max-h-96 w-full rounded-t object-scale-down"
-				src={ song.img_src ?? defaultImageSrc }
-				alt={ "title" }
-			/>
+			<div className="relative text-center text-yellow-50">
+				<img
+					className={ `${didNotLoad && "blur-sm"} max-h-96 w-full rounded-t object-scale-down` }
+					src={ song.img_src ?? defaultImageSrc }
+					alt={ "title" }
+				/>
+				{ didNotLoad && <p className="text-2xl text-red-600 absolute top-1/2 left-1/2 transform -translate-x-1/2">Could not load song</p> }
+			</div>
 			{/* nice looking text for title of the song */ }
 			<h3 className="mt-4 text-center font-sans text-2xl">{ song.artists?.join(", ") }</h3>
 			<h4 className="text-center text-gray-600 font-sans text-md">{ song.name }</h4>
@@ -90,6 +114,7 @@ interface PlayerControlsPropsI {
 
 function PlayerControls({ togglePlay, isPlaying, song, timePlayed, duration }: PlayerControlsPropsI) {
 	const percentPlayed = duration === 0 ? 0 : (timePlayed / duration) * 100;
+	const didNotLoad = song.src === null || song.src === undefined;
 	return (
 		<div className="my-3 pb-3">
 			<span className="w-full flex justify-center flex-row align-middle">
@@ -99,11 +124,13 @@ function PlayerControls({ togglePlay, isPlaying, song, timePlayed, duration }: P
 				</div>
 				<p className="text-gray-500 dark:text-gray-400">{ fancyTimeFormat(duration - timePlayed) }</p>
 			</span>
-			<button
-				onClick={ togglePlay }
-				className="mb-3 mx-auto rounded-full p-2 flex play-btn bg-gray-300 hover:bg-gray-400 text-gray-800">
-				{ isPlaying ? <PauseRoundedIcon /> : <PlayArrowRoundedIcon /> }
-			</button>
+			{ !didNotLoad &&
+				<button
+					onClick={ togglePlay }
+					className="mb-3 mx-auto rounded-full p-2 flex play-btn bg-gray-300 hover:bg-gray-400 text-gray-800">
+					{ isPlaying ? <PauseRoundedIcon /> : <PlayArrowRoundedIcon /> }
+				</button>
+			}
 		</div>
 	);
 }

@@ -41,18 +41,18 @@ export default function QuestionForm({ question, next, children, }: Omit<FormCom
 				ref={ ref }
 				className="relative flex flex-col justify-start"
 				action={ questionPath({ formId, questionId }) }
-				method={ "post" }>
+				method={ requiresResponse ? "post" : "get" }>
 				<input type="hidden" name="redirectTo" value={ redirectTo } />
 				{ isLastQuestion && <input type="hidden" name="isLastQuestion" value="true" /> }
 				{ children }
 				{ requiresResponse ?
 					<SubmitButton
-						className="fixed bottom-20 sm:w-1/4 w-96 left-1/2 transform -translate-x-1/2"
+						className="bottom-20 mx-auto mt-4 sm:w-1/4 w-96"
 						type={ "submit" }>
 						Submit answer
 					</SubmitButton>
 					: <NavLink
-						className="text-center fixed bottom-20 sm:w-1/4 left-1/2 transform -translate-x-1/2 w-full rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
+						className="text-center sm:w-1/4 mx-auto mt-4 w-full rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
 						to={ redirectTo }>
 						Continue
 					</NavLink>

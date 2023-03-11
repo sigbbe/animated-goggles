@@ -42,14 +42,14 @@ export async function getTrack({ track_id }: SpotifyTrack): Promise<Song | null>
 	}
 	const response = await fetchTrack({ track_id });
 	const track = await response.json();
-	return parseTrack(track);
+	return parseTrack({ ...track, id: track_id });
 }
 
 
 function parseTrack(data: any): Song | null {
 	const artists = data?.artists?.map(({ name }: { name: string; }) => name);
-	const { name } = data;
+	const { name, id } = data;
 	const img_src = data?.album?.images?.find(({ width }: { width: number; }) => width === 640).url;
 	const src = data?.preview_url;
-	return { artists, name, img_src, src };
+	return { artists, name, img_src, src, id };
 }

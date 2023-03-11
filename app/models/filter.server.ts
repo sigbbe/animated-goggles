@@ -73,6 +73,7 @@ function parseMultipleChoice(data: ParseBaseQuestion) {
 }
 
 interface Song {
+	id: string;
 	artists?: string[];
 	name?: string;
 	img_src?: string;
@@ -84,16 +85,17 @@ interface SpotifyTrack {
 }
 
 async function parseSong(data: QuestionWithBody): Promise<{ question: BaseQuestion; body: Song; } | null> {
-	const { name, artists, img_src, src, track_id } = data.body;
+	const { name, artists, img_src, src, track_id, id } = data.body;
 	delete data.body;
 	if (definedString(track_id)) {
 		const body = await getTrack({ track_id });
+		console.log(body);
 		if (body) {
 			return { question: data, body };
 		}
 		return null;
 	};
-	return { question: data, body: { artists, name, img_src, src } };
+	return { question: data, body: { id, artists, name, img_src, src } };
 }
 
 type AnyQuestion = Explenation | NumberRange | MultipleChoice | Song | SpotifyTrack | Explenation;
